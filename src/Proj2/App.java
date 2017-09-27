@@ -1,5 +1,8 @@
 /**
- * Sample Project for SWEN20003: Object Oriented Software Development 2017
+ * @author 	Luke Hedt
+ * StuID:	832153
+ * 
+ * Extends Sample Project for SWEN20003: Object Oriented Software Development 2017
  * by Eleanor McMurtry
  */
 package Proj2;
@@ -24,7 +27,7 @@ public class App extends BasicGame
     /** size of the tiles, in pixels */
     public static final int TILE_SIZE = 32;
     
-    private World world;
+    private Board board;
 
     public App()
     {    	
@@ -35,7 +38,7 @@ public class App extends BasicGame
     public void init(GameContainer gc)
     throws SlickException
     {
-    	world = new World();
+    	board = new Board();
     }
 
     /** Update the game state for a frame.
@@ -48,7 +51,11 @@ public class App extends BasicGame
     {
         // Get data about the current input (keyboard state).
         Input input = gc.getInput();
-        world.update(input, delta);
+        board.update(input, delta);
+        
+        if (input.isKeyDown(Input.KEY_ESCAPE)) {
+			gc.exit();
+		}
     }
 
     /** Render the entire screen, so it reflects the current game state.
@@ -58,7 +65,7 @@ public class App extends BasicGame
     public void render(GameContainer gc, Graphics g)
     throws SlickException
     {
-    	world.render(g);
+    	board.render(g);
     }
 
     /** Start-up method. Creates the game and runs it.

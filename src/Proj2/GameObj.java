@@ -1,3 +1,11 @@
+/**
+ * @author 	Luke Hedt
+ * StuID:	832153
+ * 
+ * Extends Sample Project for SWEN20003: Object Oriented Software Development 2017
+ * by Eleanor McMurtry
+ */
+
 package Proj2;
 
 import org.newdawn.slick.Image;
@@ -5,7 +13,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Graphics;
 
-public class Sprite {
+public class GameObj {
 	// Used to decide what direction an object is moving
 	// Look up enums to find a more elegant solution!
 	public static final int DIR_NONE = 0;
@@ -18,7 +26,7 @@ public class Sprite {
 	private float x;
 	private float y;
 	
-	public Sprite(String image_src, float x, float y) {
+	public GameObj(String image_src, float x, float y) {
 		try {
 			image = new Image(image_src);
 		} catch (SlickException e) {

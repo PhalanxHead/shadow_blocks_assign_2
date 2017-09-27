@@ -1,8 +1,16 @@
+/**
+ * @author 	Luke Hedt
+ * StuID:	832153
+ * 
+ * Extends Sample Project for SWEN20003: Object Oriented Software Development 2017
+ * by Eleanor McMurtry
+ */
+
 package Proj2;
 
 import org.newdawn.slick.Input;
 
-public class Player extends Sprite {
+public class Player extends Unit {
 	
 	public Player(float x, float y) {
 		super("res/player_left.png", x, y);
