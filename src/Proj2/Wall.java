@@ -1,4 +1,4 @@
-package project1;
+package Proj2;
 
 public class Wall extends Sprite {
 	public Wall(float x, float y) {

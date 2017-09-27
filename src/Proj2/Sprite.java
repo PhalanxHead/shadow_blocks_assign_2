@@ -1,4 +1,4 @@
-package project1;
+package Proj2;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;

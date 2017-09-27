@@ -1,4 +1,4 @@
-package project1;
+package Proj2;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

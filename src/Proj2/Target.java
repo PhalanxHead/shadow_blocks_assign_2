@@ -1,4 +1,4 @@
-package project1;
+package Proj2;
 
 public class Target extends Sprite {
 	public Target(float x, float y) {
