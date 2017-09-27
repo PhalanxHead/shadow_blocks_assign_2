@@ -5,7 +5,7 @@
  * Extends Sample Project for SWEN20003: Object Oriented Software Development 2017
  * by Eleanor McMurtry
  */
-package Proj2;
+package proj2;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;

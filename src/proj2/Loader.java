@@ -6,13 +6,19 @@
  * by Eleanor McMurtry
  */
 
-package Proj2;
+package proj2;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+
+import proj2.Blocks.Stone;
+import proj2.Tiles.Floor;
+import proj2.Tiles.Target;
+import proj2.Tiles.Wall;
+import proj2.Units.Player;
 
 public class Loader {
 	

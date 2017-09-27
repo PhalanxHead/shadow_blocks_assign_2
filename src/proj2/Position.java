@@ -3,7 +3,7 @@
  * StuID:	832153
  */
 
-package Proj2;
+package proj2;
 
 /**
  * Holds the current X,Y position of the associated object in tiles

@@ -6,10 +6,13 @@
  * by Eleanor McMurtry
  */
 
-package Proj2;
+package proj2.Tiles;
+
+import proj2.Loader;
+import proj2.Tile;
 
 public class Target extends Tile {
 	public Target(float x, float y) {
-		super("res/Target.png", x, y);
+		super(Loader.OBJ_RES + "Target.png", x, y);
 	}
 }

@@ -6,10 +6,13 @@
  * by Eleanor McMurtry
  */
 
-package Proj2;
+package proj2.Blocks;
+
+import proj2.Block;
+import proj2.Loader;
 
 public class Stone extends Block {
 	public Stone(float x, float y) {
-		super("res/stone.png", x, y);
+		super(Loader.OBJ_RES + "stone.png", x, y);
 	}
 }

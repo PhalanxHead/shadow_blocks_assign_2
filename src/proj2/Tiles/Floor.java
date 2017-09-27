@@ -6,10 +6,13 @@
  * by Eleanor McMurtry
  */
 
-package Proj2;
+package proj2.Tiles;
+
+import proj2.Loader;
+import proj2.Tile;
 
 public class Floor extends Tile {
 	public Floor(float x, float y) {
-		super("res/floor.png", x, y);
+		super(Loader.OBJ_RES + "floor.png", x, y);
 	}
 }

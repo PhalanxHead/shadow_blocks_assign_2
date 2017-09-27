@@ -3,7 +3,7 @@
  * StuID:	832153
  */
 
-package Proj2;
+package proj2;
 
 public class Block extends GameObj {
 

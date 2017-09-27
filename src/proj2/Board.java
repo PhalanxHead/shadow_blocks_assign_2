@@ -6,7 +6,7 @@
  * by Eleanor McMurtry
  */
 
-package Proj2;
+package proj2;
 
 import java.util.ArrayList;
 import org.newdawn.slick.Graphics;

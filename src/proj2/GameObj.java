@@ -6,7 +6,7 @@
  * by Eleanor McMurtry
  */
 
-package Proj2;
+package proj2;
 
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;

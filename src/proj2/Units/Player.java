@@ -6,14 +6,17 @@
  * by Eleanor McMurtry
  */
 
-package Proj2;
+package proj2.Units;
 
 import org.newdawn.slick.Input;
+
+import proj2.Loader;
+import proj2.Unit;
 
 public class Player extends Unit {
 	
 	public Player(float x, float y) {
-		super("res/player_left.png", x, y);
+		super(Loader.OBJ_RES + "player_left.png", x, y);
 	}
 
 	@Override
