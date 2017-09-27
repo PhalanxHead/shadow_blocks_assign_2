@@ -6,10 +6,7 @@
  * by Eleanor McMurtry
  */
 
-package proj2.Tiles;
-
-import proj2.Loader;
-import proj2.Tile;
+package proj2;
 
 public class Target extends Tile {
 	public Target(float x, float y) {

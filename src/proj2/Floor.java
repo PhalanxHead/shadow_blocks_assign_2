@@ -6,10 +6,7 @@
  * by Eleanor McMurtry
  */
 
-package proj2.Tiles;
-
-import proj2.Loader;
-import proj2.Tile;
+package proj2;
 
 public class Floor extends Tile {
 	public Floor(float x, float y) {

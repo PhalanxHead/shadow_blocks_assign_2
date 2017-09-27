@@ -6,10 +6,7 @@
  * by Eleanor McMurtry
  */
 
-package proj2.Blocks;
-
-import proj2.Block;
-import proj2.Loader;
+package proj2;
 
 public class Stone extends Block {
 	public Stone(float x, float y) {

@@ -3,10 +3,7 @@
  * StuID:	832153
  */
 
-package proj2.Units;
-
-import proj2.Loader;
-import proj2.Unit;
+package proj2;
 
 public class Mage extends Unit {
 

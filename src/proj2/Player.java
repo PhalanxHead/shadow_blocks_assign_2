@@ -6,12 +6,9 @@
  * by Eleanor McMurtry
  */
 
-package proj2.Units;
+package proj2;
 
 import org.newdawn.slick.Input;
-
-import proj2.Loader;
-import proj2.Unit;
 
 public class Player extends Unit {
 	
