@@ -1,3 +1,8 @@
+/**
+ * @author 	Luke Hedt
+ * StuID:	832153
+ */
+
 package proj2;
 
 public class Ice extends Block {
