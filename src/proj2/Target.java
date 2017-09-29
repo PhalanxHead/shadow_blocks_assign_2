@@ -9,7 +9,8 @@
 package proj2;
 
 public class Target extends Tile {
-	public Target(float x, float y) {
+	
+	public Target(int x, int y) {
 		super(Loader.OBJ_RES + "Target.png", x, y);
 	}
 }

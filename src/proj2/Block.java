@@ -5,11 +5,10 @@
 
 package proj2;
 
-public class Block extends GameObj {
+public abstract class Block extends GameObj {
 
-	public Block(String image_src, float x, float y) {
+	public Block(String image_src, int x, int y) {
 		super(image_src, x, y);
-		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -9,7 +9,8 @@
 package proj2;
 
 public class Floor extends Tile {
-	public Floor(float x, float y) {
+	
+	public Floor(int x, int y) {
 		super(Loader.OBJ_RES + "floor.png", x, y);
 	}
 }

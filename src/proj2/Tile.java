@@ -5,11 +5,9 @@
 
 package proj2;
 
-public class Tile extends GameObj {
+public abstract class Tile extends GameObj {
 
-	public Tile(String image_src, float x, float y) {
+	public Tile(String image_src, int x, int y) {
 		super(image_src, x, y);
-		// TODO Auto-generated constructor stub
 	}
-
 }

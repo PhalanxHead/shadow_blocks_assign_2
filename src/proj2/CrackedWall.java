@@ -7,8 +7,7 @@ package proj2;
 
 public class CrackedWall extends Tile {
 
-	public CrackedWall(String image_src, float x, float y) {
+	public CrackedWall(String image_src, int x, int y) {
 		super(Loader.OBJ_RES + "cracked_wall.png", x, y);
-		// TODO Auto-generated constructor stub
 	}
 }

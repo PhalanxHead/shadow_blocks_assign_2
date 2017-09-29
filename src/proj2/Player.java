@@ -12,7 +12,7 @@ import org.newdawn.slick.Input;
 
 public class Player extends Unit {
 	
-	public Player(float x, float y) {
+	public Player(int x, int y) {
 		super(Loader.OBJ_RES + "player_left.png", x, y);
 	}
 
@@ -35,5 +35,32 @@ public class Player extends Unit {
 		
 		// Move to our destination
 		moveToDest(dir);
+	}
+	
+	public void moveToDest(int dir) {
+		int speed = 32;
+		// Translate the direction to an x and y displacement
+		int delta_x = 0,
+			  delta_y = 0;
+		switch (dir) {
+			case DIR_LEFT:
+				delta_x = -speed;
+				break;
+			case DIR_RIGHT:
+				delta_x = speed;
+				break;
+			case DIR_UP:
+				delta_y = -speed;
+				break;
+			case DIR_DOWN:
+				delta_y = speed;
+				break;
+		}
+		
+		// Make sure the position isn't occupied!
+		if (!Loader.isBlocked(pos.getX() + delta_x, pos.getY() + delta_y)) {
+			pos.moveX(delta_x);
+			pos.moveY(delta_y);
+		}
 	}
 }

@@ -33,7 +33,7 @@ public class Loader {
 	 * @param y		the y position
 	 * @return		the sprite object
 	 */
-	private static GameObj createGameObj(String name, float x, float y) {
+	private static GameObj createGameObj(String name, int x, int y) {
 		switch (name) {
 			case "wall":
 				return new Wall(x, y);
@@ -103,7 +103,7 @@ public class Loader {
 			// Loop over every line of the file
 			while ((line = reader.readLine()) != null) {
 				String name;
-				float x, y;
+				int x, y;
 				
 				// Split the line into parts
 				parts = line.split(",");

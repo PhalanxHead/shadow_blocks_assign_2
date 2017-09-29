@@ -9,7 +9,7 @@
 package proj2;
 
 public class Stone extends Block {
-	public Stone(float x, float y) {
+	public Stone(int x, int y) {
 		super(Loader.OBJ_RES + "stone.png", x, y);
 	}
 }

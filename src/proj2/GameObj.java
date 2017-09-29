@@ -13,7 +13,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Graphics;
 
-public class GameObj {
+public abstract class GameObj {
 	// Used to decide what direction an object is moving
 	// Look up enums to find a more elegant solution!
 	public static final int DIR_NONE = 0;
@@ -23,7 +23,7 @@ public class GameObj {
 	public static final int DIR_DOWN = 4;
 	
 	private Image image = null;
-	private Position pos;
+	public Position pos;
 	
 	public GameObj(String image_src, int x, int y) {
 		try {
