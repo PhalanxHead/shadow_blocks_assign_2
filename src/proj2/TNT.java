@@ -11,4 +11,9 @@ public class TNT extends Block {
 		super(Loader.OBJ_RES + "tnt.png", x, y);
 	}
 
+
+	public void moveToDest(Dirs dir) {
+		
+	}
+	
 }

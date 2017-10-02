@@ -18,42 +18,44 @@ public class Player extends Unit {
 
 	@Override
 	public void update(Input input, int delta) {
-		int dir = DIR_NONE;
+		Dirs dir = Dirs.NONE;
 
 		if (input.isKeyPressed(Input.KEY_LEFT)) {
-			dir = DIR_LEFT;
+			dir = Dirs.LEFT;
 		}
 		else if (input.isKeyPressed(Input.KEY_RIGHT)) {
-			dir = DIR_RIGHT;
+			dir = Dirs.RIGHT;
 		}
 		else if (input.isKeyPressed(Input.KEY_UP)) {
-			dir = DIR_UP;
+			dir = Dirs.UP;
 		}
 		else if (input.isKeyPressed(Input.KEY_DOWN)) {
-			dir = DIR_DOWN;
+			dir = Dirs.DOWN;
 		}
 		
 		// Move to our destination
 		moveToDest(dir);
 	}
 	
-	public void moveToDest(int dir) {
+	public void moveToDest(Dirs dir) {
 		int speed = 32;
 		// Translate the direction to an x and y displacement
 		int delta_x = 0,
 			  delta_y = 0;
 		switch (dir) {
-			case DIR_LEFT:
+			case LEFT:
 				delta_x = -speed;
 				break;
-			case DIR_RIGHT:
+			case RIGHT:
 				delta_x = speed;
 				break;
-			case DIR_UP:
+			case UP:
 				delta_y = -speed;
 				break;
-			case DIR_DOWN:
+			case DOWN:
 				delta_y = speed;
+				break;
+			default:
 				break;
 		}
 		

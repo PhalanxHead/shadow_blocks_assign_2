@@ -11,7 +11,7 @@ public class Rogue extends Unit {
 		super(Loader.OBJ_RES + "rogue.png", x, y);
 	}
 	
-	public void moveToDest(int dir) {
+	public void moveToDest(Dirs dir) {
 		
 	}
 

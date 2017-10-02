@@ -14,13 +14,6 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Graphics;
 
 public abstract class GameObj {
-	// Used to decide what direction an object is moving
-	// Look up enums to find a more elegant solution!
-	public static final int DIR_NONE = 0;
-	public static final int DIR_LEFT = 1;
-	public static final int DIR_RIGHT = 2;
-	public static final int DIR_UP = 3;
-	public static final int DIR_DOWN = 4;
 	
 	private Image image = null;
 	public Position pos;

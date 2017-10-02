@@ -11,4 +11,6 @@ public abstract class Block extends GameObj {
 		super(image_src, x, y);
 	}
 
+	public abstract void moveToDest(Dirs dir);
+	
 }
