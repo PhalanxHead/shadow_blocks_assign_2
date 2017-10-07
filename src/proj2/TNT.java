@@ -7,7 +7,7 @@ package proj2;
 
 public class TNT extends Block {
 
-	public TNT(String image_src, int x, int y) {
+	public TNT(int x, int y) {
 		super(Loader.OBJ_RES + "tnt.png", x, y);
 	}
 

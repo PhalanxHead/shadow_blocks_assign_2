@@ -45,6 +45,22 @@ public class Loader {
 				return new Target(x, y);
 			case "player":
 				return new Player(x, y);
+			case "cracked":
+				return new CrackedWall(x, y);
+			case "door":
+				return new Door(x, y);
+			case "ice":
+				return new Ice(x, y);
+			case "mage":
+				return new Mage(x, y);
+			case "rogue":
+				return new Rogue(x, y);
+			case "skeleton":
+				return new Skellington(x, y);
+			case "switch":
+				return new Switch(x,y);
+			case "tnt":
+				return new TNT(x,y);
 		}
 		return null;
 	}

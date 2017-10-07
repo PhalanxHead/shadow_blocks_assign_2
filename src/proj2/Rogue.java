@@ -7,7 +7,7 @@ package proj2;
 
 public class Rogue extends Unit {
 
-	public Rogue(String image_src, int x, int y) {
+	public Rogue(int x, int y) {
 		super(Loader.OBJ_RES + "rogue.png", x, y);
 	}
 	

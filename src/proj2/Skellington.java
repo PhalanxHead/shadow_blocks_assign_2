@@ -7,7 +7,7 @@ package proj2;
 
 public class Skellington extends Unit {
 
-	public Skellington(String image_src, int x, int y) {
+	public Skellington(int x, int y) {
 		super(Loader.OBJ_RES + "skull.png", x, y);
 	}
 	
