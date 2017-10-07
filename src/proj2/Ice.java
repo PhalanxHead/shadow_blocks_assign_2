@@ -10,9 +10,5 @@ public class Ice extends Block {
 	public Ice(int x, int y) {
 		super(Loader.OBJ_RES + "ice.png", x, y);
 	}
-
-	public void moveToDest(Dirs dir) {
-		
-	}
 	
 }

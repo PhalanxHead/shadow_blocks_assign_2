@@ -11,8 +11,8 @@ public class Skellington extends Unit {
 		super(Loader.OBJ_RES + "skull.png", x, y);
 	}
 	
-	public void moveToDest(Dirs dir) {
-		
+	public boolean moveToDest(Dirs dir) {
+		return true;
 	}
 
 }

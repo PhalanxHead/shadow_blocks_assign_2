@@ -12,12 +12,4 @@ public class Stone extends Block {
 	public Stone(int x, int y) {
 		super(Loader.OBJ_RES + "stone.png", x, y);
 	}
-	
-
-	public void moveToDest(Dirs dir) {
-		
-	}
-	
-	
-	
 }

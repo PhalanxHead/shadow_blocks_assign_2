@@ -12,6 +12,11 @@ public abstract class Unit extends GameObj {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public abstract void moveToDest(Dirs dir);
+	/**
+	 * Moves the object and returns true if successful
+	 * @param dir : Dirs. The direction to move in.
+	 * @return True on successful move.
+	 */
+	public abstract boolean moveToDest(Dirs dir);
 
 }

@@ -27,7 +27,7 @@ public class App extends BasicGame
     /** size of the tiles, in pixels */
     public static final int TILE_SIZE = 32;
     
-    private Board board;
+    private Board board, newBoard;
 
     public App()
     {    	
@@ -38,10 +38,10 @@ public class App extends BasicGame
     public void init(GameContainer gc)
     throws SlickException
     {
-    	board = new Board();
+    	board = new Board(0);
     }
 
-    /** Update the game state for a frame.
+    /** Update the game state for a frame. Checks for nextBoard condition.
      * @param gc The Slick game container object.
      * @param delta Time passed since last frame (milliseconds).
      */
@@ -56,6 +56,14 @@ public class App extends BasicGame
         if (input.isKeyDown(Input.KEY_ESCAPE)) {
 			gc.exit();
 		}
+        
+        if(board.getTargetDiff() <= 0 && board.getNumBoard() != 5) {
+        	newBoard = loadNextBoard(board.getNumBoard());
+        	board.destroy();
+        	board = newBoard;
+        } else if(board.getNumBoard() > 5) {
+        	gc.exit();
+        }
     }
 
     /** Render the entire screen, so it reflects the current game state.
@@ -80,5 +88,15 @@ public class App extends BasicGame
         app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
         app.start();
     }
+    
+    /**
+     * Loads the next board
+     * @param boardNum : int. The number of the current board.
+     * @return The next Board object
+     */
+	private Board loadNextBoard(int boardNum) {
+		Board nextBoard = new Board(boardNum + 1);
+		return nextBoard;
+	}
 
 }

@@ -11,8 +11,8 @@ public class Mage extends Unit {
 		super(Loader.OBJ_RES + "mage.png", x, y);
 	}
 	
-	public void moveToDest(Dirs dir) {
-		
+	public boolean moveToDest(Dirs dir) {
+		return true;
 	}
 
 }

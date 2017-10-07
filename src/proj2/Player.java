@@ -19,7 +19,7 @@ public class Player extends Unit {
 	@Override
 	public void update(Input input, int delta) {
 		Dirs dir = Dirs.NONE;
-
+		
 		if (input.isKeyPressed(Input.KEY_LEFT)) {
 			dir = Dirs.LEFT;
 		}
@@ -37,7 +37,7 @@ public class Player extends Unit {
 		moveToDest(dir);
 	}
 	
-	public void moveToDest(Dirs dir) {
+	public boolean moveToDest(Dirs dir) {
 		int speed = 32;
 		// Translate the direction to an x and y displacement
 		int delta_x = 0,
@@ -64,5 +64,7 @@ public class Player extends Unit {
 			pos.moveX(delta_x);
 			pos.moveY(delta_y);
 		}
+
+		return true;
 	}
 }
