@@ -9,6 +9,7 @@
 package proj2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
@@ -17,51 +18,26 @@ public class Board {
 	public static final int IND_X = 0;
 	public static final int IND_Y = 1;
 	
-	/* Interactive Tile Types */
-	public static final String[] blockingTileTypes = {"wall", "door", "cracked"};
-	public static final String[] unitTypes = {"player", "rogue", "skeleton", "mage"};
-	public static final String[] blockTypes = {"stone", "ice", "tnt"};
-	public static final String[] specialTypes = {"switch"};
-	
-	
 	private ArrayList<GameObj> gameObjs;
 	private int numTargets;
 	private int coveredTargets = 0;
 	private int numMoves = 0;
 	private int numBoard;
 	
+	/**
+	 * Board Constructor.
+	 * @param boardNum : int. The current board number.
+	 */
 	public Board(int boardNum) {
 		this.gameObjs = Loader.loadGameObjs(Loader.LVL_RES + boardNum + ".lvl");
 		this.numBoard = boardNum;
 		this.numTargets = getNumTargets(this.gameObjs);
+
 	}
 	
-	public static Position pixToTiles(int pixels[]) {
-		// Unimplemented
-		return null;
-	}
-	
-	public static int[] tilesToPix(Position pos) {
-		// Unimplemented
-		return null;
-	}
-	
-	public void update(Input input, int delta) {
-		for (GameObj gameObj : gameObjs) {
-			if (gameObj != null) {
-				gameObj.update(input, delta);
-			}
-		}
-	}
-	
-	public void render(Graphics g) {
-		for (GameObj gameObj : gameObjs) {
-			if (gameObj != null) {
-				gameObj.render(g);
-			}
-		}
-	}
-	
+	/**
+	 * Start the board again!
+	 */
 	public void reset() {
 		// Unimplemented
 	}
@@ -99,6 +75,39 @@ public class Board {
 		this.numBoard = 0;
 	}
 	
+	/**
+	 * Updates all of the elements of the board.
+	 * @param input : Input. The input device.
+	 * @param delta : int. The time between new frames.
+	 */
+	public void update(Input input, int delta) {
+		for (GameObj gameObj : gameObjs) {
+			if (gameObj != null) {
+				gameObj.update(input, delta);
+			}
+		}
+		
+		if(input.isKeyPressed(Input.KEY_Z)) {
+			undo();
+		}
+	}
+	
+	/**
+	 * Renders the board once again
+	 * @param g : Graphics. The graphics engine to use for rendering.
+	 */
+	public void render(Graphics g) {
+		for (GameObj gameObj : gameObjs) {
+			if (gameObj != null) {
+				gameObj.render(g);
+			}
+		}
+	}
+	
+	
+	/**
+	 * Reverse a move!
+	 */
 	private void undo() {
 		// Unimplemented
 	}
@@ -117,7 +126,4 @@ public class Board {
 		}
 		return numTargets;
 	}
-
-
-	
 }

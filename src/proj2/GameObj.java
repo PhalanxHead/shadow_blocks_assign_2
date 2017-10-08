@@ -16,6 +16,7 @@ import org.newdawn.slick.Graphics;
 public abstract class GameObj {
 	
 	private Image image = null;
+	private String name;
 	public Position pos;
 	
 	public GameObj(String image_src, int x, int y) {
@@ -24,7 +25,7 @@ public abstract class GameObj {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		
+		this.name = image_src;
 		this.pos = new Position(x,y);
 	}
 	
@@ -34,5 +35,9 @@ public abstract class GameObj {
 	
 	public void render(Graphics g) {
 		image.drawCentered(pos.getX(), pos.getY());
+	}
+	
+	public String getName() {
+		return this.name;
 	}
 }
