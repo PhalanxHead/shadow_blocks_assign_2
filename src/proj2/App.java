@@ -3,7 +3,7 @@
  * StuID:	832153
  * 
  * Extends Sample Project for SWEN20003: Object Oriented Software Development 2017
- * by Eleanor McMurtry. Based on Project 2A Design by Eleanor McMurtry
+ * by Eleanor McMurtry. Based on Project 2A Design by Eleanor McMurtry.
  */
 package proj2;
 
@@ -57,7 +57,8 @@ public class App extends BasicGame
 			gc.exit();
 		}
         
-        if(board.getTargetDiff() <= 0 && board.getNumBoard() != 5) {
+        if((board.getTargetDiff() <= 0 || input.isKeyPressed(Input.KEY_A)) 
+        		&& board.getNumBoard() != 5) {
         	newBoard = loadNextBoard(board.getNumBoard());
         	board.destroy();
         	board = newBoard;

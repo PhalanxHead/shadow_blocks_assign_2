@@ -1,6 +1,9 @@
 /**
  * @author 	Luke Hedt
  * StuID:	832153
+ * 
+ * Extends Sample Project for SWEN20003: Object Oriented Software Development 2017
+ * by Eleanor McMurtry. Based on Project 2A Design by Eleanor McMurtry.
  */
 
 package proj2;
@@ -11,7 +14,7 @@ public class Ice extends Pushable {
 	
 	Dirs dir;
 	private int lastTileX;
-	private int lastTileY;
+	private int lastTileY;	
 	private Timer timer;
 	
 	public Ice(int x, int y) {
@@ -32,10 +35,12 @@ public class Ice extends Pushable {
 		// Unimplemented
 	}
 	
-	public void push(Dirs dir) {
+	@Override
+	public boolean push(Dirs dir) {
 		this.dir = dir;
 		
 		// Unimplemented
+		return false;
 	}
 	
 	public void update(int delta) {

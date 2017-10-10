@@ -3,7 +3,7 @@
  * StuID:	832153
  * 
  * Extends Sample Project for SWEN20003: Object Oriented Software Development 2017
- * by Eleanor McMurtry
+ * by Eleanor McMurtry. Based on Project 2A Design by Eleanor McMurtry.
  */
 
 package proj2;
@@ -36,18 +36,20 @@ public abstract class GameObj {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		this.tileX = tileX;
-		this.tileY = tileY;
+		this.setTileX(tileX);
+		this.setTileY(tileY);
+		nameTag = new ArrayList<>(1);
 	}
 	
 	public void update(Input input, int delta) {
-		
+		// Nothing
 	}
 	
 	public void render(Graphics g) {
-		image.drawCentered(Loader.tilesToPix(tileX, true), Loader.tilesToPix(tileY, false));
+		image.draw(Loader.tilesToPix(getTileX(), true), Loader.tilesToPix(getTileY(), false));
 	}
 	
+	@SuppressWarnings("unchecked")
 	public ArrayList<String> getNameTags() {
 		return (ArrayList<String>)this.nameTag.clone();
 	}
@@ -63,13 +65,24 @@ public abstract class GameObj {
 			}
 		}	
 	}
-	
-	public boolean compareNameTag(String compare) {
-		for(String tag : getNameTags()) {
-			if(tag.equals(compare)) {
-				return true;
-			}
-		}
+	public boolean push(Dirs dir) {
+		// Only implemented for Pushable
 		return false;
+	}
+
+	public int getTileX() {
+		return tileX;
+	}
+
+	public void setTileX(int tileX) {
+		this.tileX = tileX;
+	}
+
+	public int getTileY() {
+		return tileY;
+	}
+
+	public void setTileY(int tileY) {
+		this.tileY = tileY;
 	}
 }

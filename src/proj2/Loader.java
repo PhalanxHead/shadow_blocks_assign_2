@@ -54,20 +54,16 @@ public class Loader {
 			/* Loop over every line of the file */
 			while ((line = reader.readLine()) != null) {
 				String name;
-				int x, y;
+				int tileX, tileY;
 				
 				/* Split the line into parts */
 				parts = line.split(",");
 				name = parts[0];
-				x = Integer.parseInt(parts[1]);
-				y = Integer.parseInt(parts[2]);
-				
-				/* Adjust for the grid */
-				x = boardOffset[Board.IND_X] + x * App.TILE_SIZE;
-				y = boardOffset[Board.IND_Y] + y * App.TILE_SIZE;
-				
+				tileX = Integer.parseInt(parts[1]);
+				tileY = Integer.parseInt(parts[2]);
+
 				/* Create the sprite */
-				list.add(newGameObj(name, x, y));
+				list.add(newGameObj(name, tileX, tileY));
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -102,9 +98,18 @@ public class Loader {
 		return 0;
 	}
 	
-	public static boolean inBounds(int tx, int ty) {
-		// Unimplemented
-		return true;
+	/**
+	 * Checks if the object is in the bounds of the board.
+	 * @param tileX : int. TileX value to be checked.
+	 * @param tileY : int. TileY value to be checked.
+	 * @return True is the position is within the board's bounds.
+	 */
+	public static boolean inBounds(int tileX, int tileY) {
+		if(tileX >= 0 && tileX < getBoardSize()[Board.IND_X]
+				&& tileY >= 0 && tileY < getBoardSize()[Board.IND_Y]) {
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -112,16 +117,16 @@ public class Loader {
 	 * @param pixels : int[]. The pixels from (0,0) to convert.
 	 * @return The Position object equivalent.
 	 */
-	public static int[] pixToTiles(float x, float y) {
+	public static int[] pixToTiles(float pixX, float pixY) {
 		int[] position = new int[2]; 
-		x -= getBoardOffset()[Board.IND_X];
-		x /= App.TILE_SIZE;
-		y -= getBoardOffset()[Board.IND_Y];
-		y /= App.TILE_SIZE;
+		pixX -= getBoardOffset()[Board.IND_X];
+		pixX /= App.TILE_SIZE;
+		pixY -= getBoardOffset()[Board.IND_Y];
+		pixY /= App.TILE_SIZE;
 		
 		// Rounding is important here
-		position[Board.IND_X] = Math.round(x);
-		position[Board.IND_Y] = Math.round(y);
+		position[Board.IND_X] = Math.round(pixX);
+		position[Board.IND_Y] = Math.round(pixY);
 		return position;
 	}
 	
@@ -141,6 +146,7 @@ public class Loader {
 			return tilePos += getBoardOffset()[Board.IND_Y];
 		}
 		
+		
 	}
 	
 	/**
@@ -156,34 +162,34 @@ public class Loader {
 		return pixPos;
 	}
 	
-	private static GameObj newGameObj(String name, int x, int y) {
+	private static GameObj newGameObj(String name, int tileX, int tileY) {
 		switch (name) {
 			case "wall":
-				return new Wall(x, y);
+				return new Wall(tileX, tileY);
 			case "floor":
-				return new Floor(x, y);
+				return new Floor(tileX, tileY);
 			case "stone":
-				return new Stone(x, y);
+				return new Stone(tileX, tileY);
 			case "target":
-				return new Target(x, y);
+				return new Target(tileX, tileY);
 			case "player":
-				return new Player(x, y);
+				return new Player(tileX, tileY);
 			case "cracked":
-				return new CrackedWall(x, y);
-			case "door":
-				return new Door(x, y);
+				return new CrackedWall(tileX, tileY);
+			case "door":	
+				return new Door(tileX, tileY);
 			case "ice":
-				return new Ice(x, y);
+				return new Ice(tileX, tileY);
 			case "mage":
-				return new Mage(x, y);
+				return new Mage(tileX, tileY);
 			case "rogue":
-				return new Rogue(x, y);
+				return new Rogue(tileX, tileY);
 			case "skeleton":
-				return new Skellington(x, y);
+				return new Skellington(tileX, tileY);
 			case "switch":
-				return new Switch(x, y);
+				return new Switch(tileX, tileY);
 			case "tnt":
-				return new TNT(x, y);
+				return new TNT(tileX, tileY);
 		}
 		return null;
 	}
