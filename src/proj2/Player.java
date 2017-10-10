@@ -10,7 +10,7 @@ package proj2;
 
 import org.newdawn.slick.Input;
 
-public class Player extends Unit {
+public class Player extends Moveable {
 	
 	public Player(int x, int y) {
 		super(Loader.OBJ_RES + "player_left.png", x, y);
@@ -37,6 +37,7 @@ public class Player extends Unit {
 		moveToDest(dir);
 	}
 	
+	@Override
 	public boolean moveToDest(Dirs dir) {
 		int speed = 32;
 		// Translate the direction to an x and y displacement
@@ -58,13 +59,13 @@ public class Player extends Unit {
 			default:
 				break;
 		}
-		
+		/*
 		// Make sure the position isn't occupied!
 		if (!Loader.isBlocked(pos.getX() + delta_x, pos.getY() + delta_y)) {
 			pos.moveX(delta_x);
 			pos.moveY(delta_y);
 		}
-
+		 */
 		return true;
 	}
 }

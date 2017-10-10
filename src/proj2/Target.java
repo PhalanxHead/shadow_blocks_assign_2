@@ -8,9 +8,19 @@
 
 package proj2;
 
-public class Target extends Tile {
+public class Target extends GameObj {
+	
+	private boolean activated = false;
 	
 	public Target(int x, int y) {
-		super(Loader.OBJ_RES + "Target.png", x, y);
+		super("target", x, y);
+	}
+	
+	public void update(int delta) {
+		
+	}
+	
+	public boolean isActivated() {
+		return this.activated;
 	}
 }

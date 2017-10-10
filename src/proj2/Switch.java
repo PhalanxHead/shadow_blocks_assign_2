@@ -5,10 +5,16 @@
 
 package proj2;
 
-public class Switch extends Tile {
+public class Switch extends GameObj {
 
+	public Door door;
+	
 	public Switch(int x, int y) {
-		super(Loader.OBJ_RES + "switch.png", x, y);
+		super("switch", x, y);
+	}
+	
+	public void update(int delta) {
+		// Unimplemented
 	}
 
 }

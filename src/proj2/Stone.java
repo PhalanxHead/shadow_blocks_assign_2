@@ -8,8 +8,8 @@
 
 package proj2;
 
-public class Stone extends Block {
+public class Stone extends Pushable {
 	public Stone(int x, int y) {
-		super(Loader.OBJ_RES + "stone.png", x, y);
+		super("stone", x, y);
 	}
 }

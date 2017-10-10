@@ -5,9 +5,9 @@
 
 package proj2;
 
-public class CrackedWall extends Tile {
+public class CrackedWall extends GameObj {
 
-	public CrackedWall(int x, int y) {
-		super(Loader.OBJ_RES + "cracked_wall.png", x, y);
+	public CrackedWall(int tileX, int tileY) {
+		super("cracked_wall", tileX, tileY);
 	}
 }

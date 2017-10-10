@@ -8,9 +8,9 @@
 
 package proj2;
 
-public class Floor extends Tile {
+public class Floor extends GameObj {
 	
 	public Floor(int x, int y) {
-		super(Loader.OBJ_RES + "floor.png", x, y);
+		super("floor", x, y);
 	}
 }

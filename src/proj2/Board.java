@@ -3,7 +3,7 @@
  * StuID:	832153
  * 
  * Extends Sample Project for SWEN20003: Object Oriented Software Development 2017
- * by Eleanor McMurtry
+ * by Eleanor McMurtry. Based on Project 2A Design by Eleanor McMurty.
  */
 
 package proj2;
@@ -23,6 +23,7 @@ public class Board {
 	private int coveredTargets = 0;
 	private int numMoves = 0;
 	private int numBoard;
+	private boolean playerMoved;
 	
 	/**
 	 * Board Constructor.
@@ -36,9 +37,70 @@ public class Board {
 	}
 	
 	/**
+	 * Create the appropriate sprite given a name and location.
+	 * @param name : String. The name of the sprite
+	 * @param x : int. The x position
+	 * @param y : int. The y position
+	 * @return	The sprite object
+	 */
+	public GameObj createGameObj(GameObj gameobj) {
+		// Unimplemented
+		return null;
+	}
+	
+	public boolean destroyGameObj(GameObj gameObj) {
+		// Unimplemented
+		return true;
+	}
+	
+	/** 
+	 * Converts a world coordinate to a tile coordinate,
+	 * and returns if that location is a blocked tile
+	 * @param x : float. Pixel X position in world.
+	 * @param y : float. Pixel Y position in world.
+	 * @return blocked : boolean. True if position is blocked.
+	 */
+	public static boolean isBlocked(float x, float y) {
+		// Unimplemented
+		int[] position;
+		// Convert to Tile
+		position = Loader.pixToTiles(x, y);
+		
+		// Do bounds checking!
+		if (x >= 0 && x < Loader.getBoardSize()[Board.IND_X] 
+					&& y >= 0 && y < Loader.getBoardSize()[Board.IND_Y]) {
+			// return blockerTilePresent[position[Board.IND_X]][position[Board.IND_Y]];
+		}
+		// Default to blocked
+		return true;
+	}
+	
+	public void updateMoveableHistory() {
+		// Unimplemented
+	}
+	
+	
+	/**
+	 * Reverse a move!
+	 */
+	private void undoMovables() {
+		// Unimplemented
+	}
+	
+	public GameObj getGameObjOfType(String nameTag) {
+		// Unimplemented
+		return null;
+	}
+	
+	public GameObj getGameObjOfType(String nameTag, int tileX, int tileY) {
+		// Unimplemented
+		return null;
+	}
+	
+	/**
 	 * Start the board again!
 	 */
-	public void reset() {
+	public void resetBoard() {
 		// Unimplemented
 	}
 	
@@ -88,7 +150,7 @@ public class Board {
 		}
 		
 		if(input.isKeyPressed(Input.KEY_Z)) {
-			undo();
+			undoMovables();
 		}
 	}
 	
@@ -102,14 +164,6 @@ public class Board {
 				gameObj.render(g);
 			}
 		}
-	}
-	
-	
-	/**
-	 * Reverse a move!
-	 */
-	private void undo() {
-		// Unimplemented
 	}
 	
 	/**

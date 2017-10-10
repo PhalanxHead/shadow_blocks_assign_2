@@ -5,9 +5,21 @@
 
 package proj2;
 
-public class Door extends Tile {
+import org.newdawn.slick.Graphics;
 
+public class Door extends GameObj {
+
+	private boolean closed = true;
+	
 	public Door(int x, int y) {
-		super(Loader.OBJ_RES + "door.png", x, y);
+		super("door", x, y);
+	}
+
+	public void render(Graphics g) {
+		
+	}
+	
+	public boolean getClosed() {
+		return this.closed;
 	}
 }

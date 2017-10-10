@@ -5,10 +5,14 @@
 
 package proj2;
 
-public class TNT extends Block {
+public class TNT extends Pushable {
 
 	public TNT(int x, int y) {
-		super(Loader.OBJ_RES + "tnt.png", x, y);
+		super("tnt", x, y);
+	}
+	
+	public void onMove(Dirs dir, int testX, int testY) {
+		//Unimplemented
 	}
 	
 }

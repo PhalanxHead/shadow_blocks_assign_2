@@ -5,10 +5,10 @@
 
 package proj2;
 
-public class Skellington extends Unit {
+public class Skellington extends Moveable {
 
 	public Skellington(int x, int y) {
-		super(Loader.OBJ_RES + "skull.png", x, y);
+		super("skull", x, y);
 	}
 	
 	public boolean moveToDest(Dirs dir) {

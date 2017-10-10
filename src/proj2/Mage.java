@@ -5,10 +5,10 @@
 
 package proj2;
 
-public class Mage extends Unit {
+public class Mage extends Moveable {
 
 	public Mage(int x, int y) {
-		super(Loader.OBJ_RES + "mage.png", x, y);
+		super("mage", x, y);
 	}
 	
 	public boolean moveToDest(Dirs dir) {
