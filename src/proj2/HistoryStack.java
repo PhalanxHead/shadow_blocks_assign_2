@@ -22,7 +22,6 @@ public class HistoryStack {
 		this.stackSize = 0;
 	}
 	
-	
 	public void setStackSize(int newStackSize) {
 		if(newStackSize >= 0) {
 			this.stackSize = newStackSize;
@@ -41,15 +40,14 @@ public class HistoryStack {
 	
 	public int[] popFromStack() {
 		int[] newPos = new int[2];
-		try {
+		if(this.stackSize >= 1) {
+			this.setStackSize(this.getStackSize() - 1);
 			newPos[Board.IND_X] = this.xStack.pop();
 			newPos[Board.IND_Y] = this.yStack.pop();
-			this.setStackSize(this.getStackSize() - 1);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return newPos;
-		
+			return newPos;
+		} 
+		this.setStackSize(0);
+		return null;
 	}
 	
 }

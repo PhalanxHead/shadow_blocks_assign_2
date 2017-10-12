@@ -104,7 +104,7 @@ public class Board {
 	/**
 	 * Reverse a move!
 	 */
-	private void undoMovables() {
+	private void undoMoveables() {
 		for(GameObj obj : getAllGameObjsOfType("Moveable", Board.gameObjs)) {
 			obj.undo();
 		}
@@ -183,7 +183,10 @@ public class Board {
 	 * Start the board again!
 	 */
 	public void resetBoard() {
-		// Unimplemented
+		GameObj playerObj = getGameObjOfType("Player", gameObjs);
+		while(playerObj.getHistStack().getStackSize() >= 0) {
+			undoMoveables();
+		}
 	}
 	
 	/**
@@ -204,12 +207,15 @@ public class Board {
 	}
 	
 	public void setCurNumMoves(int newNumMoves) {
-		if(newNumMoves > 0) {
+		if(newNumMoves >= 0) {
 			this.curNumMoves = newNumMoves;
 		}
 	}
 	
-	
+	@SuppressWarnings("unchecked")
+	public static ArrayList<GameObj> getGameObjs() {
+		return (ArrayList<GameObj>)gameObjs.clone();
+	}
 	
 	/**
 	 * @return The number of the current board.
@@ -276,8 +282,14 @@ public class Board {
 		}
 		
 		if(input.isKeyPressed(Input.KEY_Z)) {
-			undoMovables();
+			undoMoveables();
 		}
+		
+		if(input.isKeyPressed(Input.KEY_R)) {
+			resetBoard();
+		}
+		
+		this.setCurNumMoves(this.getInitNumMoves() + getGameObjOfType("Player", gameObjs).getHistStack().getStackSize());
 	}
 	
 	/**
@@ -291,7 +303,6 @@ public class Board {
 			}
 		}
 		
-		this.setCurNumMoves(this.getInitNumMoves() + getGameObjOfType("Player", gameObjs).getHistStack().getStackSize());
 		g.drawString(String.format("Moves: %d", this.getCurNumMoves()),20.0f,20.0f);
 		
 	}

@@ -29,8 +29,10 @@ public abstract class Moveable extends GameObj {
 	
 	public void undo() {
 		int[] newPos = this.histStack.popFromStack();
-		this.setTileX(newPos[Board.IND_X]);
-		this.setTileY(newPos[Board.IND_Y]);
+		if(newPos != null) {
+			this.setTileX(newPos[Board.IND_X]);
+			this.setTileY(newPos[Board.IND_Y]);
+		}
 	}
 	
 	public static int[] newTilePos(Dirs dir, int tileX, int tileY) {
@@ -81,6 +83,7 @@ public abstract class Moveable extends GameObj {
 			if(newTileX != this.getTileX() || newTileY != this.getTileY()) {
 				onMove(dir, this.getTileX(), this.getTileY());
 			}
+			
 			this.setTileX(newTileX);
 			this.setTileY(newTileY);
 			return true;
@@ -89,7 +92,7 @@ public abstract class Moveable extends GameObj {
 	}
 	
 	public void onMove(Dirs dir, int curTileX, int curTileY) {
-		this.histStack.pushToStack(curTileX, curTileY);
+		// No Default
 	}
 	
 	@Override

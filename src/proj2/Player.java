@@ -37,4 +37,10 @@ public class Player extends Moveable {
 		// Move to our destination
 		moveToDest(dir);
 	}
+	
+	public void onMove(Dirs dir, int curTileX, int curTileY) {
+		for(GameObj obj : Board.getAllGameObjsOfType("Moveable", Board.getAllGameObjs())) {
+			obj.getHistStack().pushToStack(obj.getTileX(), obj.getTileY());
+		}
+	}
 }
