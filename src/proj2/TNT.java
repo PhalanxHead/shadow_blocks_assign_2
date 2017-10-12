@@ -23,6 +23,7 @@ public class TNT extends Pushable {
 	public void onMove(Dirs dir, int curTileX, int curTileY) {
 		int[] newTilePos = newTilePos(dir, curTileX, curTileY);
 		if(Board.isNameTag(newTilePos[Board.IND_X], newTilePos[Board.IND_Y], "Explodable")) {
+			Board.createSpecialGameObj(new Explosion(newTilePos[Board.IND_X], newTilePos[Board.IND_Y]));
 			Board.destroyGameObj(
 					Board.getGameObjOfType("Explodable", newTilePos[Board.IND_X], newTilePos[Board.IND_Y]));
 			Board.destroyGameObj(this);

@@ -12,6 +12,7 @@ public class Skellington extends Moveable {
 
 	public Skellington(int x, int y) {
 		super("skull", x, y);
+		this.addNameTag("Enemy");
 	}
 	
 	public boolean moveToDest(Dirs dir) {

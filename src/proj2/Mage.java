@@ -12,6 +12,7 @@ public class Mage extends Moveable {
 
 	public Mage(int x, int y) {
 		super("mage", x, y);
+		this.addNameTag("Enemy");
 	}
 	
 	public boolean moveToDest(Dirs dir) {

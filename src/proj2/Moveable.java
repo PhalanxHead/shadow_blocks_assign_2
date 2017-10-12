@@ -17,15 +17,7 @@ public abstract class Moveable extends GameObj {
 		this.addNameTag("Moveable");
 		this.histStack = new HistoryStack();
 	}
-
-	public boolean hasHistory() {
-		// Unimplemented
-		return false;
-	}
 	
-	public void addToHistory() {
-		// Unimplemented
-	}
 	
 	public void undo() {
 		int[] newPos = this.histStack.popFromStack();
@@ -73,15 +65,16 @@ public abstract class Moveable extends GameObj {
 		int[] newTilePos = newTilePos(dir, this.getTileX(), this.getTileY());
 		int newTileX = newTilePos[Board.IND_X];
 		int newTileY = newTilePos[Board.IND_Y];
+		
+		if(newTileX != this.getTileX() || newTileY != this.getTileY()) {
+			onMove(dir, this.getTileX(), this.getTileY());
+		}
 		// Check Not Blocked
 		if (!Board.isBlocked(newTileX, newTileY)) {
 			// Check Pushable
 			if(Board.isNameTag(newTileX, newTileY, "Pushable") 
 					&& !Board.getGameObjOfType("Pushable", newTileX, newTileY).push(dir)) {
 				return false;
-			}
-			if(newTileX != this.getTileX() || newTileY != this.getTileY()) {
-				onMove(dir, this.getTileX(), this.getTileY());
 			}
 			
 			this.setTileX(newTileX);

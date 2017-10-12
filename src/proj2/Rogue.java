@@ -12,6 +12,7 @@ public class Rogue extends Moveable {
 
 	public Rogue(int x, int y) {
 		super("rogue", x, y);
+		this.addNameTag("Enemy");
 	}
 	
 	public boolean moveToDest(Dirs dir) {

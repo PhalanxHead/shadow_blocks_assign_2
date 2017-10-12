@@ -57,9 +57,13 @@ public class App extends BasicGame
 			gc.exit();
 		}
         
+        if(input.isKeyPressed(Input.KEY_R)) {
+        	board = resetBoard(board);
+		}
+        
         if((board.isLevelComplete() || input.isKeyPressed(Input.KEY_A)) 
         		&& board.getNumBoard() != 5) {
-        	newBoard = loadNextBoard(board.getNumBoard(), board.getCurNumMoves());
+        	newBoard = loadBoard(board.getNumBoard() + 1, board.getCurNumMoves());
         	board.destroy();
         	board = newBoard;
         } else if(board.getNumBoard() > 5) {
@@ -95,9 +99,13 @@ public class App extends BasicGame
      * @param boardNum : int. The number of the current board.
      * @return The next Board object
      */
-	private Board loadNextBoard(int boardNum, int numMoves) {
-		Board nextBoard = new Board(boardNum + 1, numMoves);
+	private Board loadBoard(int boardNum, int numMoves) {
+		Board nextBoard = new Board(boardNum, numMoves);
 		return nextBoard;
 	}
-
+	
+	public static Board resetBoard(Board board) {
+		return new Board(board.getNumBoard(), board.getInitNumMoves());
+	}
+	
 }

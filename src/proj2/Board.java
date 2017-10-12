@@ -20,6 +20,7 @@ public class Board {
 	
 	private static ArrayList<GameObj> gameObjs;
 	private ArrayList<GameObj> targets;
+	private static ArrayList<GameObj> special;
 	private int coveredTargets = 0;
 	private int initNumMoves = 0;
 	private int curNumMoves;
@@ -34,19 +35,21 @@ public class Board {
 		gameObjs = Loader.loadGameObjs(Loader.LVL_RES + boardNum + ".lvl");
 		this.numBoard = boardNum;
 		this.targets = getAllGameObjsOfType("Target", gameObjs);
+		special = new ArrayList<>(1);
 		this.setInitNumMoves(numMoves);
 	}
 	
-	/**
-	 * Create the appropriate sprite given a name and location.
-	 * @param name : String. The name of the sprite
-	 * @param x : int. The x position
-	 * @param y : int. The y position
-	 * @return	The sprite object
-	 */
-	public GameObj createGameObj(GameObj gameobj) {
-		// Unimplemented
-		return null;
+
+	public static void createSpecialGameObj(GameObj gameObj) {
+		special.add(gameObj);
+	}
+	
+	public static void destroySpecialGameObj(GameObj gameObj) {
+		for(GameObj obj : special) {
+			if(obj.equals(gameObj)) {
+				special.remove(obj);
+			}
+		}
 	}
 	
 	/**
@@ -180,16 +183,6 @@ public class Board {
 	}
 	
 	/**
-	 * Start the board again!
-	 */
-	public void resetBoard() {
-		GameObj playerObj = getGameObjOfType("Player", gameObjs);
-		while(playerObj.getHistStack().getStackSize() >= 0) {
-			undoMoveables();
-		}
-	}
-	
-	/**
 	 * @return The number of moves made so far.
 	 */
 	public int getInitNumMoves() {
@@ -281,15 +274,28 @@ public class Board {
 			}
 		}
 		
+		if(!special.isEmpty()) {
+			for(GameObj obj : special) {
+				obj.update(input, delta);
+			}
+		}
+		
+		
 		if(input.isKeyPressed(Input.KEY_Z)) {
 			undoMoveables();
 		}
 		
-		if(input.isKeyPressed(Input.KEY_R)) {
-			resetBoard();
-		}
+		GameObj player = getGameObjOfType("Player", gameObjs); 
 		
-		this.setCurNumMoves(this.getInitNumMoves() + getGameObjOfType("Player", gameObjs).getHistStack().getStackSize());
+		if(player != null) {
+			if(Board.getGameObjOfType("Enemy", player.getTileX(), player.getTileY()) != null) {
+				this.resetBoard();
+				return;
+			}
+			
+			this.setCurNumMoves(this.getInitNumMoves() + 
+					getGameObjOfType("Player", gameObjs).getHistStack().getStackSize());
+		}
 	}
 	
 	/**
@@ -303,7 +309,17 @@ public class Board {
 			}
 		}
 		
+		if(!special.isEmpty()) {
+			for(GameObj obj : special) {
+				obj.render(g);
+			}
+		}
+		
 		g.drawString(String.format("Moves: %d", this.getCurNumMoves()),20.0f,20.0f);
 		
+	}
+	
+	public void resetBoard() {
+		App.resetBoard(this);
 	}
 }

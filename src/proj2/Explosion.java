@@ -7,19 +7,27 @@
 
 package proj2;
 
+import org.newdawn.slick.Graphics;
+
 public class Explosion extends GameObj {
 
-	private static double LIFE = 0.4;
-	
+	// Lifespan of the explosion in ms
+	private static int LIFE = 400;
 	private Timer timer;
 	
-	public Explosion(String image_src, int tileX, int tileY) {
+	public Explosion(int tileX, int tileY) {
 		super("explosion", tileX, tileY);
-		this.timer = new Timer(LIFE, 5);
+		this.addNameTag("Timeable");
+		this.timer = new Timer(LIFE);
 	}
 	
 	public void update(int delta) {
-		// Unimplemented
+		if(this.timer != null) {
+			timer.update(delta);
+			
+			if(timer.expired()) {
+				Board.destroySpecialGameObj(this);
+			}
+		}
 	}
-
 }

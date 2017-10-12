@@ -1,29 +1,24 @@
-/**
- * @author Luke Hedt - 832153
- * 
- * Extends Sample Project for SWEN20003: Object Oriented Software Development 2017
- * by Eleanor McMurtry. Based on Project 2A Design by Eleanor McMurtry.
- */
-
 package proj2;
 
 public class Timer {
 
-	private double time;
+	private int time;
 	private int target;
 	
-	public Timer(double time, int target) {
-		this.time = time;
+	public Timer(int target) {
+		this.time = 0;
 		this.target = target;
 	}
-	
+
 	public void update(int delta) {
-		// Unimplemented
+		this.time += delta;
 	}
 	
 	public boolean expired() {
-		// Unimplemented
-		return true;
+		if(this.time >= this.target) {
+			this.time = 0;
+			return true;
+		}
+		return false;
 	}
-
 }

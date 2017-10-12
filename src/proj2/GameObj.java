@@ -46,7 +46,7 @@ public abstract class GameObj {
 	}
 	
 	public void render(Graphics g) {
-		image.draw(Loader.tilesToPix(getTileX(), true), Loader.tilesToPix(getTileY(), false));
+		image.drawCentered(Loader.tilesToPix(getTileX(), true), Loader.tilesToPix(getTileY(), false));
 	}
 
 	@Override

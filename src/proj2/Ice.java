@@ -8,44 +8,64 @@
 
 package proj2;
 
+import org.newdawn.slick.Input;
+
 public class Ice extends Pushable {
 
-	public static final double WAIT = 0.25;
+	// Time between moving in ms
+	public static final int WAIT = 250;
 	
 	Dirs dir;
 	private int lastTileX;
-	private int lastTileY;	
+	private int lastTileY;
 	private Timer timer;
+	private boolean isActive;
 	
 	public Ice(int x, int y) {
 		super("ice", x, y);
-		this.timer = new Timer(WAIT, 5);
+		this.addNameTag("Timeable");
+		this.timer = null;
+		this.isActive = false;
 	}
-	
-	public void addToHistory() {
-		// Unimplemented
-	}
-	
-	public boolean active() {
-		// Unimplemented
-		return true;
-	}
-	
-	public void undo() {
-		// Unimplemented
-	}
-	
-	/*
+
 	@Override
 	public boolean push(Dirs dir) {
 		this.dir = dir;
-		
-		// Unimplemented
+		this.lastTileX = this.getTileX();
+		this.lastTileY = this.getTileY();
+		this.timer = new Timer(WAIT);
+		this.getHistStack().pushToStack(this.lastTileX, this.lastTileY);
+		if(moveToDest(dir)) {
+			this.isActive = true;
+		}
 		return false;
 	}
-	*/
 	
-	public void update(int delta) {
-		// Unimplemented
+	@Override
+	public void update(Input input, int delta) {
+		if(this.timer != null) {
+			timer.update(delta);
+		}
+		if(this.isActive && timer.expired()) {
+			this.moveToDest(this.dir);
+		} 
+	}
+	
+	@Override
+	public boolean moveToDest(Dirs dir) {
+		int[] newTilePos = newTilePos(dir, this.getTileX(), this.getTileY());
+		int newTileX = newTilePos[Board.IND_X];
+		int newTileY = newTilePos[Board.IND_Y];
+		// Check Not Blocked
+		if(Board.isBlocked(newTileX, newTileY)) {
+			this.isActive = false;
+			this.timer = null;
+			return false;
+		}
+		
+		this.setTileX(newTileX);
+		this.setTileY(newTileY);
+		
+		return true;
 	}
 }
