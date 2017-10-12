@@ -124,7 +124,7 @@ public class Board {
 	 * @param gameObjs : ArrayList< GameObj>. The array of gameObjs to search through. 
 	 * @return The first object with a matching nameTag.
 	 */
-	private static GameObj getGameObjOfType(String nameTag, ArrayList<GameObj> gameObjs) {
+	public static GameObj getGameObjOfType(String nameTag, ArrayList<GameObj> gameObjs) {
 		// Scan through array and get the nameTag arrays, return the first matching obj.
 		for(GameObj obj : gameObjs) {
 			if(obj.getNameTags().contains(nameTag)) {
@@ -295,6 +295,10 @@ public class Board {
 			
 			this.setCurNumMoves(this.getInitNumMoves() + 
 					getGameObjOfType("Player", gameObjs).getHistStack().getStackSize());
+			
+		// Case with no player object
+		} else {
+			this.setCurNumMoves(this.getInitNumMoves());
 		}
 	}
 	

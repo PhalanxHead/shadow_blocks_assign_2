@@ -16,8 +16,22 @@ public class Switch extends GameObj {
 		super("switch", x, y);
 	}
 	
+	public boolean getDoor() {
+		
+		try {
+			this.door = (Door)Board.getGameObjOfType("Door", Board.getAllGameObjs());
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
 	public void update(int delta) {
-		// Unimplemented
+		if(Board.getGameObjOfType("Pushable", this.getTileX(), this.getTileY()) != null) {
+			this.door.setClosed(false);
+		} else {
+			this.door.setClosed(true);
+		}
 	}
 
 }

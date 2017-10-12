@@ -17,10 +17,25 @@ public class Door extends GameObj {
 	
 	public Door(int x, int y) {
 		super("door", x, y);
+		this.addNameTag("Blocking");
+		this.addNameTag("Door");
 	}
 
+	@Override
 	public void render(Graphics g) {
-		
+		if(this.getClosed()) {
+			super.render(g);
+		}
+	}
+	
+	public void setClosed(boolean closed) {
+		this.closed = closed;
+		if(closed) {
+			this.addNameTag("Blocking");
+		} else {
+			this.removeNameTag("Blocking");
+
+		}
 	}
 	
 	public boolean getClosed() {

@@ -75,7 +75,9 @@ public abstract class GameObj {
 	}
 	
 	public void addNameTag(String nameTag) {
-		this.nameTag.add(nameTag);
+		if(!getNameTags().contains(nameTag)) {
+				this.nameTag.add(nameTag);
+		}
 	}
 	
 	public void removeNameTag(String nameTag) {
