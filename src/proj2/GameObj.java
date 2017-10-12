@@ -48,6 +48,26 @@ public abstract class GameObj {
 	public void render(Graphics g) {
 		image.draw(Loader.tilesToPix(getTileX(), true), Loader.tilesToPix(getTileY(), false));
 	}
+
+	@Override
+	/**
+	 * Code from https://www.sitepoint.com/implement-javas-equals-method-correctly/
+	 */
+	public boolean equals(Object o) {
+	    // self check
+	    if (this == o)
+	        return true;
+	    // null check
+	    if (o == null)
+	        return false;
+	    // type check and cast
+	    if (getClass() != o.getClass())
+	        return false;
+	    GameObj obj = (GameObj) o;
+	    // field comparison
+	    return ((this.getTileX() == obj.getTileX()) && (this.getTileY() == obj.getTileY())
+	    		&& this.getNameTags().equals(obj.getNameTags()));
+	}
 	
 	@SuppressWarnings("unchecked")
 	public ArrayList<String> getNameTags() {
@@ -65,9 +85,19 @@ public abstract class GameObj {
 			}
 		}	
 	}
+	
 	public boolean push(Dirs dir) {
 		// Only implemented for Pushable
 		return false;
+	}
+	
+	public HistoryStack getHistStack() {
+		// Only implemented for  moveable
+		return null;
+	}
+	
+	public void undo() {
+		// Only implemented for moveable
 	}
 
 	public int getTileX() {

@@ -19,9 +19,10 @@ public class Board {
 	public static final int IND_Y = 1;
 	
 	private static ArrayList<GameObj> gameObjs;
-	private int numTargets;
+	private ArrayList<GameObj> targets;
 	private int coveredTargets = 0;
-	private int numMoves = 0;
+	private int initNumMoves = 0;
+	private int curNumMoves;
 	private int numBoard;
 	//private boolean playerMoved;
 	
@@ -29,11 +30,11 @@ public class Board {
 	 * Board Constructor.
 	 * @param boardNum : int. The current board number.
 	 */
-	public Board(int boardNum) {
+	public Board(int boardNum, int numMoves) {
 		gameObjs = Loader.loadGameObjs(Loader.LVL_RES + boardNum + ".lvl");
 		this.numBoard = boardNum;
-		this.numTargets = getNumTargets(gameObjs);
-
+		this.targets = getAllGameObjsOfType("Target", gameObjs);
+		this.setInitNumMoves(numMoves);
 	}
 	
 	/**
@@ -48,9 +49,20 @@ public class Board {
 		return null;
 	}
 	
-	public boolean destroyGameObj(GameObj gameObj) {
-		// Unimplemented
-		return true;
+	/**
+	 * Delete a GameObj from the board.
+	 * @param gameObj : GameObj. The object to be destroyed.
+	 * @return True if removal successful.
+	 */
+	public static boolean destroyGameObj(GameObj gameObj) {
+		for(GameObj obj : gameObjs) {
+			if(obj.equals(gameObj)) {
+				gameObjs.remove(obj);
+				return true;
+			}
+		}
+		// Backup if something fails/object not found.
+		return false;
 	}
 	
 	/** 
@@ -93,7 +105,14 @@ public class Board {
 	 * Reverse a move!
 	 */
 	private void undoMovables() {
-		// Unimplemented
+		for(GameObj obj : getAllGameObjsOfType("Moveable", Board.gameObjs)) {
+			obj.undo();
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static ArrayList<GameObj> getAllGameObjs() {
+		return (ArrayList<GameObj>)gameObjs.clone();
 	}
 	
 	/**
@@ -111,6 +130,21 @@ public class Board {
 		}
 		// Return null on failure.
 		return null;
+	}
+	
+	public static ArrayList<GameObj> getAllGameObjsOfType(String nameTag, ArrayList<GameObj> gameObjs) {
+		ArrayList<GameObj> ofType = new ArrayList<>(2);
+		for(GameObj obj : gameObjs) {
+			if(obj.getNameTags().contains(nameTag)) {
+				ofType.add(obj);
+			}
+		}
+		
+		// Return null on failure
+		if(ofType.isEmpty()) {
+			return null;
+		}
+		return ofType;
 	}
 	
 	/**
@@ -153,18 +187,29 @@ public class Board {
 	}
 	
 	/**
-	 * @return Gets the number of targets left to cover in this board.
-	 */
-	public int getTargetDiff() {
-		return this.numTargets - this.coveredTargets;
-	}
-	
-	/**
 	 * @return The number of moves made so far.
 	 */
-	public int getnumMoves() {
-		return this.numMoves;
+	public int getInitNumMoves() {
+		return this.initNumMoves;
 	}
+	
+	public void setInitNumMoves(int newNumMoves) {
+		if(newNumMoves > 0) {
+			this.initNumMoves = newNumMoves;
+		}
+	}
+	
+	public int getCurNumMoves() {
+		return this.curNumMoves;
+	}
+	
+	public void setCurNumMoves(int newNumMoves) {
+		if(newNumMoves > 0) {
+			this.curNumMoves = newNumMoves;
+		}
+	}
+	
+	
 	
 	/**
 	 * @return The number of the current board.
@@ -173,15 +218,36 @@ public class Board {
 		return this.numBoard;
 	}
 	
+	public boolean isLevelComplete() {
+		if(this.targets != null) {
+			return this.targets.size() - this.coveredTargets == 0;
+		}
+		// If there are no targets, return an arbitrary non-zero number.
+		return false;
+	}
+	
 	/**
 	 * Sets all member variables to null, marking as
 	 * "disposable" to the garbage collector.
 	 */
 	public void destroy() {
-		this.numTargets = 0;
+		this.targets = null;
 		this.coveredTargets = 0;
-		this.numMoves = 0;
+		this.initNumMoves = 0;
 		this.numBoard = 0;
+	}
+	
+	/**
+	 * Works out if a single block is covered.
+	 * @param tileX : int. Tile X Coord to check.
+	 * @param tileY : int. Tile Y Coord to check.
+	 * @return If there's a "Pushable" Block type in that place.
+	 */
+	public boolean isCovered(int tileX, int tileY) {
+		if(getGameObjOfType("Pushable", tileX, tileY) != null) {
+			return true;
+		}
+		return false;
 	}
 	
 	/**
@@ -190,9 +256,22 @@ public class Board {
 	 * @param delta : int. The time between new frames.
 	 */
 	public void update(Input input, int delta) {
+		
 		for (GameObj gameObj : gameObjs) {
 			if (gameObj != null) {
 				gameObj.update(input, delta);
+			}
+		}
+		
+		// Calculate the number of targets covered in this frame.
+		// (There's probably a better place to put this, don't need to
+		// Do it once a frame)
+		if(this.targets != null) {
+			this.coveredTargets = 0;
+			for(GameObj target : this.targets) {
+				if(isCovered(target.getTileX(), target.getTileY())) {
+					this.coveredTargets++;
+				}
 			}
 		}
 		
@@ -211,20 +290,9 @@ public class Board {
 				gameObj.render(g);
 			}
 		}
-	}
-	
-	/**
-	 * Returns the number of Targets on the board.
-	 * @param gameObjs: ArrayList< GameObj>. The List of pieces on the board.
-	 * @return The number of target pieces on the board.
-	 */
-	private int getNumTargets(ArrayList<GameObj> gameObjs) {
-		int numTargets = 0;
-		for(GameObj obj : gameObjs) {
-			if(obj.getClass().equals(Target.class)) {
-				numTargets++;
-			}
-		}
-		return numTargets;
+		
+		this.setCurNumMoves(this.getInitNumMoves() + getGameObjOfType("Player", gameObjs).getHistStack().getStackSize());
+		g.drawString(String.format("Moves: %d", this.getCurNumMoves()),20.0f,20.0f);
+		
 	}
 }

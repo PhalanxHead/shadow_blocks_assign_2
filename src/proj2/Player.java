@@ -14,6 +14,7 @@ public class Player extends Moveable {
 	
 	public Player(int tileX, int tileY) {
 		super("player_left", tileX, tileY);
+		this.addNameTag("Player");
 	}
 
 	@Override

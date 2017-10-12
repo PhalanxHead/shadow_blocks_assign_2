@@ -14,6 +14,7 @@ public class Target extends GameObj {
 	
 	public Target(int x, int y) {
 		super("target", x, y);
+		this.addNameTag("Target");
 	}
 	
 	public void update(int delta) {

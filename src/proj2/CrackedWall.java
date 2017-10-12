@@ -12,5 +12,6 @@ public class CrackedWall extends GameObj {
 
 	public CrackedWall(int tileX, int tileY) {
 		super("cracked_wall", tileX, tileY);
+		this.addNameTag("Explodable");
 	}
 }

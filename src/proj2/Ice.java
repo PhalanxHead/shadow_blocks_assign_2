@@ -35,6 +35,7 @@ public class Ice extends Pushable {
 		// Unimplemented
 	}
 	
+	/*
 	@Override
 	public boolean push(Dirs dir) {
 		this.dir = dir;
@@ -42,6 +43,7 @@ public class Ice extends Pushable {
 		// Unimplemented
 		return false;
 	}
+	*/
 	
 	public void update(int delta) {
 		// Unimplemented

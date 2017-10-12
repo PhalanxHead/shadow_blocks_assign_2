@@ -38,7 +38,7 @@ public class App extends BasicGame
     public void init(GameContainer gc)
     throws SlickException
     {
-    	board = new Board(0);
+    	board = new Board(0, 0);
     }
 
     /** Update the game state for a frame. Checks for nextBoard condition.
@@ -57,9 +57,9 @@ public class App extends BasicGame
 			gc.exit();
 		}
         
-        if((board.getTargetDiff() <= 0 || input.isKeyPressed(Input.KEY_A)) 
+        if((board.isLevelComplete() || input.isKeyPressed(Input.KEY_A)) 
         		&& board.getNumBoard() != 5) {
-        	newBoard = loadNextBoard(board.getNumBoard());
+        	newBoard = loadNextBoard(board.getNumBoard(), board.getCurNumMoves());
         	board.destroy();
         	board = newBoard;
         } else if(board.getNumBoard() > 5) {
@@ -95,8 +95,8 @@ public class App extends BasicGame
      * @param boardNum : int. The number of the current board.
      * @return The next Board object
      */
-	private Board loadNextBoard(int boardNum) {
-		Board nextBoard = new Board(boardNum + 1);
+	private Board loadNextBoard(int boardNum, int numMoves) {
+		Board nextBoard = new Board(boardNum + 1, numMoves);
 		return nextBoard;
 	}
 

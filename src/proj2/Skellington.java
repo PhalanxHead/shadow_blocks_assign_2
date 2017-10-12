@@ -17,5 +17,14 @@ public class Skellington extends Moveable {
 	public boolean moveToDest(Dirs dir) {
 		return true;
 	}
-
+	
+	@Override
+	public void onMove(Dirs dir, int curTileX, int curTileY) {
+		// Unimplemented for Skeleton
+	}
+	
+	@Override
+	public void undo() {
+		// Unimplemented for Skeleton
+	}
 }
