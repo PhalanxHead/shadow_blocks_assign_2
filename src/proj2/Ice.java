@@ -77,8 +77,21 @@ public class Ice extends Pushable {
 		int[] newTilePos = newTilePos(dir, this.getTileX(), this.getTileY());
 		int newTileX = newTilePos[Board.IND_X];
 		int newTileY = newTilePos[Board.IND_Y];
+		
+		// Bounds Checking
+		if(!Loader.inBounds(newTileX, newTileY)) {
+			return false;
+		}
+		
 		// Check Not Blocked
 		if(Board.isBlocked(newTileX, newTileY)) {
+			this.isActive = false;
+			this.timer = null;
+			return false;
+		}
+		
+		// Check No Enemy
+		if(Board.isNameTag(newTileX, newTileY, "Enemy")) {
 			this.isActive = false;
 			this.timer = null;
 			return false;

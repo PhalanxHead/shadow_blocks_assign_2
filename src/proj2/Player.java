@@ -65,5 +65,11 @@ public class Player extends Moveable {
 		if(rogue != null) {
 			rogue.moveToDest(rogue.getDir());
 		}
+		
+		// Move the Mage if it exists
+		Mage mage = (Mage)Board.getGameObjOfType("Mage", Board.getAllGameObjs());
+		if(mage != null) {
+			mage.moveToDest(Dirs.NONE);
+		}
 	}
 }

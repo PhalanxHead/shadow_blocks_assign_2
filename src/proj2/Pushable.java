@@ -21,6 +21,12 @@ public class Pushable extends Moveable {
 	@Override
 	public boolean push(Dirs dir) {
 		int[] newTilePos = Moveable.newTilePos(dir, this.getTileX(), this.getTileY());
+		
+		// Bounds Checking
+		if(!Loader.inBounds(newTilePos[Board.IND_X], newTilePos[Board.IND_Y])) {
+			return false;
+		}
+		
 		if(!Board.isBlocked(newTilePos[Board.IND_X], newTilePos[Board.IND_Y])
 				&& !Board.isNameTag(newTilePos[Board.IND_X], newTilePos[Board.IND_Y], "Pushable")) {
 			this.moveToDest(dir);

@@ -61,6 +61,11 @@ public class Skellington extends Moveable {
 		int newTileX = newTilePos[Board.IND_X];
 		int newTileY = newTilePos[Board.IND_Y];
 		
+		// Bounds Checking
+		if(!Loader.inBounds(newTileX, newTileY)) {
+			return false;
+		}
+		
 		if(newTileX != this.getTileX() || newTileY != this.getTileY()) {
 			onMove(dir, this.getTileX(), this.getTileY());
 		}
