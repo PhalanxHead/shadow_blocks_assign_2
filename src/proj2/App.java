@@ -1,7 +1,7 @@
 /**
- * @author 	Luke Hedt
- * StuID:	832153
- * 
+ * @author     Luke Hedt
+ * StuID:    832153
+ *
  * Extends Sample Project for SWEN20003: Object Oriented Software Development 2017
  * by Eleanor McMurtry. Based on Project 2A Design by Eleanor McMurtry.
  */
@@ -20,17 +20,17 @@ import org.newdawn.slick.Input;
  */
 public class App extends BasicGame
 {
- 	/** screen width, in pixels */
+     /** screen width, in pixels */
     public static final int SCREEN_WIDTH = 800;
     /** screen height, in pixels */
     public static final int SCREEN_HEIGHT = 600;
     /** size of the tiles, in pixels */
     public static final int TILE_SIZE = 32;
-    
+
     private Board board, newBoard;
 
     public App()
-    {    	
+    {
         super("Shadow Blocks");
     }
 
@@ -41,7 +41,7 @@ public class App extends BasicGame
     public void init(GameContainer gc)
     throws SlickException
     {
-    	board = new Board(0, 0);
+        board = new Board(0, 0);
     }
 
     /** Update the game state for a frame. Checks for nextBoard condition.
@@ -55,26 +55,25 @@ public class App extends BasicGame
         // Get data about the current input (keyboard state).
         Input input = gc.getInput();
         board.update(input, delta);
-        
+
         // Exit on Escape
         if (input.isKeyDown(Input.KEY_ESCAPE)) {
-			gc.exit();
-		}
-        
+    gc.exit();
+    }
+
         // Reset the board on input
         if(input.isKeyPressed(Input.KEY_R)) {
-        	board = resetBoard(board);
-		}
-        
-        // Loads the next Board if the level is complete or if the A key is pressed.
-        if((board.isLevelComplete() || input.isKeyPressed(Input.KEY_A)) 
-        		&& board.getNumBoard() != 5) {
-        	newBoard = loadBoard(board.getNumBoard() + 1, board.getCurNumMoves());
-        	board.destroy();
-        	board = newBoard;
-    	// Exit if trying to load out of bounds board.
+            board = resetBoard(board);
+    }
+
+        // Loads the next Board if the level is complete.
+        if(board.isLevelComplete() && board.getNumBoard() != 5) {
+            newBoard = loadBoard(board.getNumBoard() + 1, board.getCurNumMoves());
+            board.destroy();
+            board = newBoard;
+        // Exit if trying to load out of bounds board.
         } else if(board.getNumBoard() > 5) {
-        	gc.exit();
+            gc.exit();
         }
     }
 
@@ -85,7 +84,7 @@ public class App extends BasicGame
     public void render(GameContainer gc, Graphics g)
     throws SlickException
     {
-    	board.render(g);
+        board.render(g);
     }
 
     /** Start-up method. Creates the game and runs it.
@@ -100,24 +99,24 @@ public class App extends BasicGame
         app.setDisplayMode(SCREEN_WIDTH, SCREEN_HEIGHT, false);
         app.start();
     }
-    
+
     /**
      * Resets the current board.
      * @param board : Board. Current board object.
      * @return The same board but in it's initial state.
      */
     public static Board resetBoard(Board board) {
-		return new Board(board.getNumBoard(), board.getInitNumMoves());
-	}
+    return new Board(board.getNumBoard(), board.getInitNumMoves());
+    }
 
-	/**
-	 * Loads the next board
-	 * @param boardNum : int. The number of the current board.
-	 * @return The next Board object
-	 */
-	private Board loadBoard(int boardNum, int numMoves) {
-		Board nextBoard = new Board(boardNum, numMoves);
-		return nextBoard;
-	}
-	
+    /**
+     * Loads the next board
+     * @param boardNum : int. The number of the current board.
+     * @return The next Board object
+     */
+    private Board loadBoard(int boardNum, int numMoves) {
+    Board nextBoard = new Board(boardNum, numMoves);
+    return nextBoard;
+    }
+
 }

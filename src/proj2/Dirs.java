@@ -5,6 +5,6 @@ package proj2;
  * @author Luke Hedt - 8323153
  */
 public enum Dirs {
-	NONE, LEFT, RIGHT,
-	UP, DOWN;
+    NONE, LEFT, RIGHT,
+    UP, DOWN;
 }

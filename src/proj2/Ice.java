@@ -97,6 +97,13 @@ public class Ice extends Pushable {
 			return false;
 		}
 		
+		// Check No Pushable
+		if(Board.isNameTag(newTileX, newTileY, "Pushable")) {
+			this.isActive = false;
+			this.timer = null;
+			return false;
+		}
+		
 		this.setTileX(newTileX);
 		this.setTileY(newTileY);
 		
