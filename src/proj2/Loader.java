@@ -14,6 +14,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Loads objects from a .lvl file.
+ * @author Luke Hedt || Based on Design by Eleanor McMurtry.
+ */
 public class Loader {
 	
 	/* Constants */
@@ -87,16 +91,6 @@ public class Loader {
 		return boardOffset;
 	}
 	
-	public static int getTileX(float x) {
-		// Unimplemented
-		return 0;
-	}
-	
-	public static int getTileY(float y) {
-		// Unimplemented
-		return 0;
-	}
-	
 	/**
 	 * Checks if the object is in the bounds of the board.
 	 * @param tileX : int. TileX value to be checked.
@@ -144,8 +138,6 @@ public class Loader {
 		} else {
 			return tilePos += getBoardOffset()[Board.IND_Y];
 		}
-		
-		
 	}
 	
 	/**

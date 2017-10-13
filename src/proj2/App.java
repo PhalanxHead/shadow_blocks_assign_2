@@ -34,6 +34,9 @@ public class App extends BasicGame
         super("Shadow Blocks");
     }
 
+    /**
+     * Initialises the game.
+     */
     @Override
     public void init(GameContainer gc)
     throws SlickException
@@ -53,19 +56,23 @@ public class App extends BasicGame
         Input input = gc.getInput();
         board.update(input, delta);
         
+        // Exit on Escape
         if (input.isKeyDown(Input.KEY_ESCAPE)) {
 			gc.exit();
 		}
         
+        // Reset the board on input
         if(input.isKeyPressed(Input.KEY_R)) {
         	board = resetBoard(board);
 		}
         
+        // Loads the next Board if the level is complete or if the A key is pressed.
         if((board.isLevelComplete() || input.isKeyPressed(Input.KEY_A)) 
         		&& board.getNumBoard() != 5) {
         	newBoard = loadBoard(board.getNumBoard() + 1, board.getCurNumMoves());
         	board.destroy();
         	board = newBoard;
+    	// Exit if trying to load out of bounds board.
         } else if(board.getNumBoard() > 5) {
         	gc.exit();
         }
@@ -95,17 +102,22 @@ public class App extends BasicGame
     }
     
     /**
-     * Loads the next board
-     * @param boardNum : int. The number of the current board.
-     * @return The next Board object
+     * Resets the current board.
+     * @param board : Board. Current board object.
+     * @return The same board but in it's initial state.
      */
+    public static Board resetBoard(Board board) {
+		return new Board(board.getNumBoard(), board.getInitNumMoves());
+	}
+
+	/**
+	 * Loads the next board
+	 * @param boardNum : int. The number of the current board.
+	 * @return The next Board object
+	 */
 	private Board loadBoard(int boardNum, int numMoves) {
 		Board nextBoard = new Board(boardNum, numMoves);
 		return nextBoard;
-	}
-	
-	public static Board resetBoard(Board board) {
-		return new Board(board.getNumBoard(), board.getInitNumMoves());
 	}
 	
 }

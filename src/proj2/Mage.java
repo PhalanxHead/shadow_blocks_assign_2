@@ -8,6 +8,10 @@
 
 package proj2;
 
+/**
+ * Mage, chases player using algorithm set in specification. Enemy.
+ * @author Luke Hedt - 832153 || Based on Design by Eleanor McMurtry.
+ */
 public class Mage extends Moveable {
 
 	public Mage(int x, int y) {

@@ -8,6 +8,10 @@
 
 package proj2;
 
+/**
+ * Cracked Wall Object. Explodable. Blocking.
+ * @author Luke Hedt - 832153 || Based on Design by Eleanor McMurtry
+ */
 public class CrackedWall extends GameObj {
 
 	public CrackedWall(int tileX, int tileY) {

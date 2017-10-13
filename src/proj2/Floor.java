@@ -8,6 +8,10 @@
 
 package proj2;
 
+/**
+ * Floor. Literal Background. Does nothing.
+ * @author Luke Hedt - 832153 || Based on Design by Eleanor McMurtry
+ */
 public class Floor extends GameObj {
 	
 	public Floor(int x, int y) {

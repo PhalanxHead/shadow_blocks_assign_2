@@ -11,6 +11,11 @@ package proj2;
 
 import org.newdawn.slick.Graphics;
 
+/**
+ * Door Object. Disappears when the related switch is covered by a block.
+ * Blocking. Door.
+ * @author Luke Hedt - 832153 || Based on Design by Eleanor McMurtry
+ */
 public class Door extends GameObj {
 
 	private boolean closed = true;
@@ -21,6 +26,9 @@ public class Door extends GameObj {
 		this.addNameTag("Door");
 	}
 
+	/**
+	 * Only render if the door is closed.
+	 */
 	@Override
 	public void render(Graphics g) {
 		if(this.getClosed()) {
@@ -30,6 +38,10 @@ public class Door extends GameObj {
 		}
 	}
 	
+	/**
+	 * Sets the door's state.
+	 * @param closed : boolean. True if closed.
+	 */
 	public void setClosed(boolean closed) {
 		this.closed = closed;
 		if(closed) {
@@ -40,6 +52,10 @@ public class Door extends GameObj {
 		}
 	}
 	
+	/**
+	 * Returns if the door is closed.
+	 * @return True if door is closed.
+	 */
 	public boolean getClosed() {
 		return this.closed;
 	}

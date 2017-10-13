@@ -8,13 +8,12 @@
 
 package proj2;
 
+/**
+ * Stone Object. Pushable.
+ * @author Luke Hedt - 832153 || Based on Design by Eleanor McMurtry.
+ */
 public class Stone extends Pushable {
 	public Stone(int x, int y) {
 		super("stone", x, y);
-	}
-	
-	public boolean active() {
-		// Unimplemented
-		return false;
 	}
 }

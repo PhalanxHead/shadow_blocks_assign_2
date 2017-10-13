@@ -8,6 +8,10 @@
 
 package proj2;
 
+/**
+ * Moveable Abstract Object. Has a historyStack.
+ * @author Luke Hedt - 832153 || Based on Design by Eleanor McMurtry
+ */
 public abstract class Moveable extends GameObj {
 
 	private HistoryStack histStack;
@@ -19,17 +23,14 @@ public abstract class Moveable extends GameObj {
 	}
 	
 	/**
-	 * Undoes a move
+	 * Works out where the object is moving to.
+	 * @param dir : Dirs. Direction of Travel.
+	 * @param tileX : int. Current tileX Coord.
+	 * @param tileY : int. Current tileY Coord.
+	 * @return Array of next position.
 	 */
-	public void undo() {
-		int[] newPos = this.histStack.popFromStack();
-		if(newPos != null) {
-			this.setTileX(newPos[Board.IND_X]);
-			this.setTileY(newPos[Board.IND_Y]);
-		}
-	}
-	
 	public static int[] newTilePos(Dirs dir, int tileX, int tileY) {
+		// Moving one tile at a time.
 		int speed = 1;
 		int[] newTilePos = new int[2];
 		// Translate the direction to an x and y displacement
@@ -51,7 +52,6 @@ public abstract class Moveable extends GameObj {
 				break;
 		}
 		
-		// Make sure the position isn't occupied!
 		newTilePos[Board.IND_X] = tileX + delta_x;
 		newTilePos[Board.IND_Y] = tileY + delta_y;
 		
@@ -59,7 +59,7 @@ public abstract class Moveable extends GameObj {
 	}
 	
 	/**
-	 * Moves to destination
+	 * Moves to destination, pushing blocks if necessary.
 	 * @param dir : Dirs. The direction to move in.
 	 * @return True if successful
 	 */
@@ -71,25 +71,44 @@ public abstract class Moveable extends GameObj {
 		if(newTileX != this.getTileX() || newTileY != this.getTileY()) {
 			onMove(dir, this.getTileX(), this.getTileY());
 		}
-		// Check Not Blocked
-		if (!Board.isBlocked(newTileX, newTileY)) {
-			// Check Pushable
-			if(Board.isNameTag(newTileX, newTileY, "Pushable") 
-					&& !Board.getGameObjOfType("Pushable", newTileX, newTileY).push(dir)) {
-				return false;
-			}
+		// Check Not Blocked and try and push a pushable if it exists
+		if(Board.isBlocked(newTileX, newTileY)
+				|| (Board.isNameTag(newTileX, newTileY, "Pushable") && 
+						!Board.getGameObjOfType("Pushable", newTileX, newTileY).push(dir))) {
+			return false;
 			
+		} else {
 			this.setTileX(newTileX);
 			this.setTileY(newTileY);
 			return true;
 		}
-		return false;
 	}
 	
+	/**
+	 * Executes any move-triggered events.
+	 * @param dir : Dirs. Direction of travel.
+	 * @param curTileX : int. The current X tile.
+	 * @param curTileY : int. Tge current Y tile.
+	 */
 	public void onMove(Dirs dir, int curTileX, int curTileY) {
-		// No Default
+		// Does nothing by default.
 	}
 	
+	/**
+	 * Undoes a move
+	 */
+	@Override
+	public void undo() {
+		int[] newPos = this.histStack.popFromStack();
+		if(newPos != null) {
+			this.setTileX(newPos[Board.IND_X]);
+			this.setTileY(newPos[Board.IND_Y]);
+		}
+	}
+
+	/**
+	 * Returns the object's History Stack.
+	 */
 	@Override
 	public HistoryStack getHistStack() {
 		return this.histStack;

@@ -8,20 +8,13 @@
 
 package proj2;
 
+/**
+ * Place to put pushables, covering them all finishes the level
+ * @author Luke Hedt - 832153 || Based on Design by Eleanor McMurtry
+ */
 public class Target extends GameObj {
-	
-	private boolean activated = false;
-	
 	public Target(int x, int y) {
 		super("target", x, y);
 		this.addNameTag("Target");
-	}
-	
-	public void update(int delta) {
-		
-	}
-	
-	public boolean isActivated() {
-		return this.activated;
 	}
 }

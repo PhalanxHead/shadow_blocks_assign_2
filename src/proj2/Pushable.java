@@ -7,6 +7,10 @@
 
 package proj2;
 
+/**
+ * Pushable Objects can be pushed.
+ * @author Luke Hedt - 832153 || Based on Design by Eleanor McMurtry.
+ */
 public class Pushable extends Moveable {
 
 	public Pushable(String image_src, int tileX, int tileY) {
@@ -24,10 +28,4 @@ public class Pushable extends Moveable {
 		}
 		return false;
 	}
-	
-	public boolean active() {
-		// Unimplemented
-		return true;
-	}
-
 }

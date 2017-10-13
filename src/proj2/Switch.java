@@ -8,25 +8,30 @@
 
 package proj2;
 
+import org.newdawn.slick.Input;
+
+/**
+ * Switch. Controls Door Objects.
+ * @author lhedt
+ *
+ */
 public class Switch extends GameObj {
 
-	public Door door;
+	public Door door = null;
 	
 	public Switch(int x, int y) {
 		super("switch", x, y);
 	}
 	
-	public boolean getDoor() {
-		
-		try {
-			this.door = (Door)Board.getGameObjOfType("Door", Board.getAllGameObjs());
-			return true;
-		} catch (Exception e) {
-			return false;
+	/**
+	 * Sets the door state based on if the switch is covered.
+	 */
+	@Override
+	public void update(Input input, int delta) {
+		if(this.door == null ) {
+			this.door = getDoor();
 		}
-	}
-	
-	public void update(int delta) {
+		
 		GameObj pushable = Board.getGameObjOfType("Pushable", this.getTileX(), this.getTileY()); 
 		if(pushable != null) {
 			this.door.setClosed(false);
@@ -41,5 +46,12 @@ public class Switch extends GameObj {
 			this.door.setClosed(true);
 		}
 	}
-
+	
+	/**
+	 * Gets the door object from the main ArrayList.
+	 * @return The Door.
+	 */
+	private Door getDoor() {
+		return (Door)Board.getGameObjOfType("Door", Board.getAllGameObjs());
+	}
 }

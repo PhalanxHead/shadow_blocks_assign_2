@@ -12,15 +12,15 @@ import org.newdawn.slick.Input;
 
 /**
  * Ice block - Slides until it hits another block or Wall.
- * @author Luke Hedt - 832153
- *
+ * @author Luke Hedt - 832153 || Based on Design by Eleanor McMurtry
  */
 public class Ice extends Pushable {
 
 	// Time between moving in ms
 	public static final int WAIT = 250;
 	
-	Dirs dir;
+	// Member Variables
+	private Dirs dir;
 	private int lastTileX;
 	private int lastTileY;
 	private Timer timer;
@@ -125,5 +125,13 @@ public class Ice extends Pushable {
 	 */
 	public int getLastTileY() {
 		return this.lastTileY;
+	}
+	
+	/**
+	 * Returns the direction of the object
+	 * @return direction as Dirs.
+	 */
+	public Dirs getDir() {
+		return this.dir;
 	}
 }

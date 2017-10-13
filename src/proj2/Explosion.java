@@ -9,6 +9,11 @@ package proj2;
 
 import org.newdawn.slick.Input;
 
+/**
+ * Explosion Object. Appears when TNT hits an Explodable Object for LIFE ms.
+ * @author lhedt
+ *
+ */
 public class Explosion extends GameObj {
 
 	// Lifespan of the explosion in ms
@@ -20,6 +25,9 @@ public class Explosion extends GameObj {
 		this.timer = new Timer(LIFE);
 	}
 	
+	/**
+	 * Destroy after LIDE ms.
+	 */
 	@Override
 	public void update(Input input, int delta) {
 		timer.update(delta);
@@ -29,6 +37,9 @@ public class Explosion extends GameObj {
 		}
 	}
 	
+	/**
+	 * Destroys the Object.
+	 */
 	public void destroy() {
 		Board.destroySpecialGameObj();
 	}

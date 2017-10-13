@@ -10,6 +10,10 @@ package proj2;
 
 import org.newdawn.slick.Input;
 
+/**
+ * Main User-Controllable Object in the game. Player.
+ * @author Luke Hedt - 832153 || Based on Design by Eleanor McMurtry.
+ */
 public class Player extends Moveable {
 	
 	public Player(int tileX, int tileY) {
@@ -17,6 +21,9 @@ public class Player extends Moveable {
 		this.addNameTag("Player");
 	}
 
+	/**
+	 * Translates input to a direction and tries to move the player.
+	 */
 	@Override
 	public void update(Input input, int delta) {
 		Dirs dir = Dirs.NONE;
@@ -38,7 +45,12 @@ public class Player extends Moveable {
 		moveToDest(dir);
 	}
 	
+	/**
+	 * Execute Actions triggered by a player move.
+	 */
+	@Override
 	public void onMove(Dirs dir, int curTileX, int curTileY) {
+		// Add positions to historyStacks
 		for(GameObj obj : Board.getAllGameObjsOfType("Moveable", Board.getAllGameObjs())) {
 			// Check for ice special cases
 			if(!obj.getNameTags().contains("Ice")) {
@@ -47,6 +59,11 @@ public class Player extends Moveable {
 				Ice ice = (Ice)obj;
 				ice.getHistStack().pushToStack(ice.getLastTileX(), ice.getLastTileY());
 			}
+		}
+		// Move the rogue if it exists
+		Rogue rogue = (Rogue)Board.getGameObjOfType("Rogue", Board.getAllGameObjs());
+		if(rogue != null) {
+			rogue.moveToDest(rogue.getDir());
 		}
 	}
 }

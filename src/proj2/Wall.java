@@ -8,8 +8,12 @@
 
 package proj2;
 
+/**
+ * Wall. Blocking.
+ * @author Luke Hedt - 832153 || Based on Design by Eleanor McMurtry
+ */
 public class Wall extends GameObj {
-	
+
 	public Wall(int x, int y) {
 		super("wall", x, y);
 		this.addNameTag("Blocking");
