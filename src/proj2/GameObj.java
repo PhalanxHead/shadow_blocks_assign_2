@@ -49,10 +49,11 @@ public abstract class GameObj {
 		image.drawCentered(Loader.tilesToPix(getTileX(), true), Loader.tilesToPix(getTileY(), false));
 	}
 
-	@Override
+	
 	/**
 	 * Code from https://www.sitepoint.com/implement-javas-equals-method-correctly/
 	 */
+	@Override
 	public boolean equals(Object o) {
 	    // self check
 	    if (this == o)

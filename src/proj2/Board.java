@@ -9,7 +9,6 @@
 package proj2;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 
@@ -20,7 +19,7 @@ public class Board {
 	
 	private static ArrayList<GameObj> gameObjs;
 	private ArrayList<GameObj> targets;
-	private static ArrayList<GameObj> special;
+	private static GameObj special;
 	private int coveredTargets = 0;
 	private int initNumMoves = 0;
 	private int curNumMoves;
@@ -33,23 +32,19 @@ public class Board {
 	 */
 	public Board(int boardNum, int numMoves) {
 		gameObjs = Loader.loadGameObjs(Loader.LVL_RES + boardNum + ".lvl");
+		special = null;
 		this.numBoard = boardNum;
 		this.targets = getAllGameObjsOfType("Target", gameObjs);
-		special = new ArrayList<>(1);
 		this.setInitNumMoves(numMoves);
 	}
 	
-
-	public static void createSpecialGameObj(GameObj gameObj) {
-		special.add(gameObj);
+	public static boolean createSpecialGameObj(GameObj gameObj) {
+		special = gameObj;
+		return true;
 	}
 	
-	public static void destroySpecialGameObj(GameObj gameObj) {
-		for(GameObj obj : special) {
-			if(obj.equals(gameObj)) {
-				special.remove(obj);
-			}
-		}
+	public static void destroySpecialGameObj() {
+		special = null;
 	}
 	
 	/**
@@ -274,10 +269,8 @@ public class Board {
 			}
 		}
 		
-		if(!special.isEmpty()) {
-			for(GameObj obj : special) {
-				obj.update(input, delta);
-			}
+		if(special != null) {
+			special.update(input, delta);
 		}
 		
 		
@@ -313,10 +306,8 @@ public class Board {
 			}
 		}
 		
-		if(!special.isEmpty()) {
-			for(GameObj obj : special) {
-				obj.render(g);
-			}
+		if(special != null) {
+			special.render(g);
 		}
 		
 		g.drawString(String.format("Moves: %d", this.getCurNumMoves()),20.0f,20.0f);

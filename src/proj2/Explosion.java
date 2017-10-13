@@ -7,7 +7,7 @@
 
 package proj2;
 
-import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 
 public class Explosion extends GameObj {
 
@@ -17,17 +17,19 @@ public class Explosion extends GameObj {
 	
 	public Explosion(int tileX, int tileY) {
 		super("explosion", tileX, tileY);
-		this.addNameTag("Timeable");
 		this.timer = new Timer(LIFE);
 	}
 	
-	public void update(int delta) {
-		if(this.timer != null) {
-			timer.update(delta);
-			
-			if(timer.expired()) {
-				Board.destroySpecialGameObj(this);
-			}
+	@Override
+	public void update(Input input, int delta) {
+		timer.update(delta);
+		
+		if(timer.expired()) {
+			this.destroy();
 		}
+	}
+	
+	public void destroy() {
+		Board.destroySpecialGameObj();
 	}
 }

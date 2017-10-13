@@ -27,8 +27,16 @@ public class Switch extends GameObj {
 	}
 	
 	public void update(int delta) {
-		if(Board.getGameObjOfType("Pushable", this.getTileX(), this.getTileY()) != null) {
+		GameObj pushable = Board.getGameObjOfType("Pushable", this.getTileX(), this.getTileY()); 
+		if(pushable != null) {
 			this.door.setClosed(false);
+		 
+			if(pushable.getNameTags().contains("Ice")) {
+				Ice ice = (Ice)pushable;
+				ice.setIsActive(false);
+				return;
+			}
+			
 		} else {
 			this.door.setClosed(true);
 		}

@@ -40,7 +40,13 @@ public class Player extends Moveable {
 	
 	public void onMove(Dirs dir, int curTileX, int curTileY) {
 		for(GameObj obj : Board.getAllGameObjsOfType("Moveable", Board.getAllGameObjs())) {
-			obj.getHistStack().pushToStack(obj.getTileX(), obj.getTileY());
+			// Check for ice special cases
+			if(!obj.getNameTags().contains("Ice")) {
+				obj.getHistStack().pushToStack(obj.getTileX(), obj.getTileY());
+			} else {
+				Ice ice = (Ice)obj;
+				ice.getHistStack().pushToStack(ice.getLastTileX(), ice.getLastTileY());
+			}
 		}
 	}
 }

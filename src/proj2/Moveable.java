@@ -18,7 +18,9 @@ public abstract class Moveable extends GameObj {
 		this.histStack = new HistoryStack();
 	}
 	
-	
+	/**
+	 * Undoes a move
+	 */
 	public void undo() {
 		int[] newPos = this.histStack.popFromStack();
 		if(newPos != null) {

@@ -10,6 +10,11 @@ package proj2;
 
 import org.newdawn.slick.Input;
 
+/**
+ * Ice block - Slides until it hits another block or Wall.
+ * @author Luke Hedt - 832153
+ *
+ */
 public class Ice extends Pushable {
 
 	// Time between moving in ms
@@ -24,23 +29,36 @@ public class Ice extends Pushable {
 	public Ice(int x, int y) {
 		super("ice", x, y);
 		this.addNameTag("Timeable");
+		this.addNameTag("Ice");
 		this.timer = null;
 		this.isActive = false;
-	}
-
-	@Override
-	public boolean push(Dirs dir) {
-		this.dir = dir;
 		this.lastTileX = this.getTileX();
 		this.lastTileY = this.getTileY();
-		this.timer = new Timer(WAIT);
-		this.getHistStack().pushToStack(this.lastTileX, this.lastTileY);
-		if(moveToDest(dir)) {
-			this.isActive = true;
+	}
+
+	/**
+	 * Only moves if it isn't already sliding
+	 */
+	@Override
+	public boolean push(Dirs dir) {
+		if(!this.isActive) {
+			this.dir = dir;
+			this.lastTileX = this.getTileX();
+			this.lastTileY = this.getTileY();
+			this.timer = new Timer(WAIT);
+			this.getHistStack().pushToStack(this.lastTileX, this.lastTileY);
+			
+			if(moveToDest(dir)) {
+				this.isActive = true;
+				return true;
+			}
 		}
 		return false;
 	}
 	
+	/**
+	 * Moves every time the time expires
+	 */
 	@Override
 	public void update(Input input, int delta) {
 		if(this.timer != null) {
@@ -51,6 +69,9 @@ public class Ice extends Pushable {
 		} 
 	}
 	
+	/**
+	 * Move one tile, stop when a block is hit.
+	 */
 	@Override
 	public boolean moveToDest(Dirs dir) {
 		int[] newTilePos = newTilePos(dir, this.getTileX(), this.getTileY());
@@ -67,5 +88,42 @@ public class Ice extends Pushable {
 		this.setTileY(newTileY);
 		
 		return true;
+	}
+	
+	/**
+	 * Undoes a move and stops the block moving.
+	 */
+	@Override
+	public void undo() {
+		int[] newPos = this.getHistStack().popFromStack();
+		this.isActive = false;
+		if(newPos != null) {
+			this.setTileX(newPos[Board.IND_X]);
+			this.setTileY(newPos[Board.IND_Y]);
+		}
+	}
+	
+	/**
+	 * Sets the active state of the block.
+	 * @param isActive : boolean. True if block is moving.
+	 */
+	public void setIsActive(boolean isActive) {
+		this.isActive = isActive;
+	}
+	
+	/**
+	 * Gets the Last TileX Value.
+	 * @return LastTileX
+	 */
+	public int getLastTileX() {
+		return this.lastTileX;
+	}
+	
+	/**
+	 * Gets the Last TileY Value.
+	 * @return LastTileY
+	 */
+	public int getLastTileY() {
+		return this.lastTileY;
 	}
 }

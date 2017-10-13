@@ -25,6 +25,8 @@ public class Door extends GameObj {
 	public void render(Graphics g) {
 		if(this.getClosed()) {
 			super.render(g);
+		} else {
+			return;
 		}
 	}
 	
